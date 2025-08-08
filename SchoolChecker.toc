@@ -1,0 +1,13 @@
+## Interface: 30300
+## Title: |cffFF9100School Checker|r
+## Title-ruRU: |cffFF9100School Checker|r
+## Notes: Frame/AddOn for school check.
+## Notes-ruRU: Фрейм/АддОн для проверки стихий.
+## Author: DarhangeR
+## Version: |cffff00001.0|r
+## DefaultState: enabled
+## X-Date: 2025
+## X-Category: Information
+## SavedVariables: SchoolChecker_DB
+
+Core.xml

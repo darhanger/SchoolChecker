@@ -1,0 +1,15 @@
+﻿<Ui xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+    <Script file="Core.lua"/>
+    <Frame name="SchoolChecker_Startup">
+        <Scripts>
+            <OnLoad>
+            	this:RegisterEvent("ADDON_LOADED");
+            </OnLoad>
+	     <OnEvent>
+		if SchoolChecker then
+			SchoolChecker.OnEvent(this, event, arg1, arg2, arg3, arg4, ...);
+		end
+	     </OnEvent>
+        </Scripts>
+    </Frame>
+</Ui>
