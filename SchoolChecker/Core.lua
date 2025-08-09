@@ -154,14 +154,47 @@ local SCHOOL_MASKS = {
     [64]  = { name = "Arcane",   color = "cffcc66ff" },
 };
 
-local function GetSchoolName(mask)
-    local names = {};
+local SPECIAL_SCHOOL_MASKS = {
+    [3]   = { name = "Holystrike", color = "cfff8df58" },  -- Светло-желтый (смешение Physical и Holy)
+    [5]   = { name = "Flamestrike", color = "cfff89b7a" },  -- Оранжево-розовый
+    [6]   = { name = "Holyfire", color = "cffff8822" },     -- Ярко-оранжевый
+    [9]   = { name = "Stormstrike", color = "cff92f871" },  -- Светло-зеленый
+    [10]  = { name = "Holystorm", color = "cff99e519" },    -- Желто-зеленый
+    [12]  = { name = "Firestorm", color = "cff99a13b" },    -- Желто-коричневый
+    [17]  = { name = "Froststrike", color = "cff79dfd7" },  -- Светло-голубой
+    [20]  = { name = "Frostfire", color = "cff7f88a1" },    -- Сине-розовый
+    [24]  = { name = "Froststorm", color = "cff19e599" },   -- Бирюзовый
+    [28]  = { name = "Elemental", color = "cff66af7c" },    -- Зелено-голубой
+    [33]  = { name = "Shadowstrike", color = "cffacacd7" }, -- Светло-фиолетовый
+    [34]  = { name = "Twilight", color = "cffb2997f" },     -- Розово-желтый
+    [36]  = { name = "Shadowflame", color = "cffb255a1" },  -- Красно-фиолетовый
+    [40]  = { name = "Plague", color = "cff4cb299" },       -- Темно-зеленый с фиолетовым
+    [49]  = { name = "Shadowfrost", color = "cff72b6e4" },  -- Голубо-фиолетовый
+    [66]  = { name = "Divine", color = "cffe5997f" },       -- Розово-желтый
+    [68]  = { name = "Spellfire", color = "cffe555a1" },    -- Магента
+    [72]  = { name = "Spellstorm", color = "cff7fb299" },   -- Фиолетово-зеленый
+    [80]  = { name = "Spellfrost", color = "cff6699ff" },   -- Сине-фиолетовый
+    [96]  = { name = "Spellshadow", color = "cff9966ff" },  -- Фиолетовый
+    [126] = { name = "Magic", color = "cff9ea897" },        -- Серо-зеленый (смешение всех магических)
+    [127] = { name = "Chaos", color = "cff909b93" },        -- Серо-розовый (все стихии)
+};
+
+local function GetSchoolDisplay(mask)
+    local parts = {};
     for flag, data in pairs(SCHOOL_MASKS) do
         if bit.band(mask, flag) ~= 0 then
-            tinsert(names, format("|%s%s|r", data.color, data.name));
+            tinsert(parts, format("|%s%s|r", data.color, data.name));
         end
     end
-    return #names > 0 and table.concat(names, " + ") or "|cffff0000Unknown|r";
+
+    local expanded = #parts > 0 and table.concat(parts, " + ") or "|cffff0000Unknown|r";
+
+    local special = SPECIAL_SCHOOL_MASKS[mask];
+    if special then
+        return format("|%s%s|r (%s)", special.color, special.name, expanded);
+    else
+        return expanded;
+    end
 end;
 
 frame:RegisterEvent("ADDON_LOADED");
@@ -172,12 +205,12 @@ frame:SetScript("OnEvent", function(self, event, ...)
 
     if (type == "SPELL_DAMAGE" or type == "SPELL_PERIODIC_DAMAGE") then
         if (destGUID == UnitGUID("player") or destName == UnitName("player")) then
-            local schoolText = GetSchoolName(spellSchool)
+            local schoolText = GetSchoolDisplay(spellSchool or 0);
 			local message
 			if ru then
-				message = format("|cff00ff00Получен урон от:|r |cffffffff%s|r (|cffffffff%d|r) - |cff00ff00стихия:|r %s", spellName, spellId, schoolText)
+				message = format("|cff00ff00Урон от:|r |cffffffff%s|r (|cffffffffID: %d|r) - СТИХИЯ: %s", spellName, spellId, schoolText)
 			else
-				message = format("|cff00ff00Damage taken from:|r |cffffffff%s|r (|cffffffff%d|r) - |cff00ff00School:|r %s", spellName, spellId, schoolText)
+				message = format("|cff00ff00Damage from:|r |cffffffff%s|r (|cffffffffID: %d|r) - SCHOOL: %s", spellName, spellId, schoolText)
 			end
 			frame:AddMessage(message);
         end
