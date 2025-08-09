@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD004 MD033 -->
 <div align="center">
 
-# SchoolChecker 1.0
+# SchoolChecker 1.1
 
 ![Lua 5.1](https://img.shields.io/badge/Lua-5.1-2C2D72?style=flat-square&logo=lua&logoColor=white)
 [![License](https://img.shields.io/github/license/darhanger/SchoolChecker?style=flat-square)](https://github.com/darhanger/SchoolChecker/releases) 
