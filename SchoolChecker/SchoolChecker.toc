@@ -1,12 +1,12 @@
 ## Interface: 30300
 ## Title: |cffFF9100School Checker|r
 ## Title-ruRU: |cffFF9100School Checker|r
-## Notes: Frame/AddOn for school check.
-## Notes-ruRU: Фрейм/АддОн для проверки стихий.
+## Notes: Displays the spell school of incoming damage.
+## Notes-ruRU: Показывает школу заклинаний входящего урона.
 ## Author: DarhangeR
-## Version: |cffff00001.1|r
+## Version: 1.2
 ## DefaultState: enabled
-## X-Date: 2025
+## X-Date: 2026-07-19
 ## X-Category: Information
 ## SavedVariables: SchoolChecker_DB
 
